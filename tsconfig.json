@@ -18,7 +18,13 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "pages/*": ["./src/fsd/pages/*"],
+      "app/*": ["./src/fsd/app/*"],
+      "entities/*": ["./src/fsd/entities/*"],
+      "widgets/*": ["./src/fsd/widgets/*"],
+      "shared/*": ["./src/fsd/shared/*"],
+      "features/*": ["./src/fsd/features/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

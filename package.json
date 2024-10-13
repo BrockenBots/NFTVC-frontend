@@ -12,6 +12,7 @@
     "@nextui-org/react": "^2.4.8",
     "effector": "^23.2.3",
     "effector-react": "^23.2.1",
+    "ethers": "^6.13.4",
     "framer-motion": "^11.11.8",
     "next": "14.2.15",
     "react": "^18",
