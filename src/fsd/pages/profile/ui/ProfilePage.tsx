@@ -10,8 +10,16 @@ import {
   CardFooter,
   CardHeader,
   Chip,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  Snippet,
   Tab,
   Tabs,
+  Textarea,
+  useDisclosure,
 } from "@nextui-org/react";
 import Link from "next/link";
 
@@ -38,6 +46,7 @@ export function ProfilePage() {
       content: "status",
     },
   ];
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <Container background={background} className="flex-row justify-center">
       <div className="w-1/2 max-w-[526px] p-3">
@@ -80,10 +89,16 @@ export function ProfilePage() {
               onSelectionChange={(key) => console.log(key)}
               items={tabs}
               className="mr-2"
+              classNames={{
+                tabList: "bg-zinc-900",
+                cursor: "bg-zinc-700",
+                tabContent:
+                  "group-data-[hover=true]:text-white group-data-[selected=true]:text-white",
+              }}
             >
               {(item) => <Tab key={item.id} title={item.label} />}
             </Tabs>
-            <Button isIconOnly color="success" className="p-0">
+            <Button isIconOnly onPress={onOpen} color="success" className="p-0">
               <div className="rounded-full text-xl flex justify-center items-center text-green-500 bg-zinc-900 w-5 h-5">
                 +
               </div>
@@ -175,6 +190,43 @@ export function ProfilePage() {
           </p>
         </Card>
       </div>
+      <Modal
+        backdrop="blur"
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        className="bg-zinc-900 text-default"
+        classNames={{
+          header: "[role=button]:hidden",
+        }}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                Создание достижения
+              </ModalHeader>
+              <ModalBody>
+                <Textarea placeholder="Введите имя или описание"></Textarea>
+                <Button color="success" variant="light" onPress={onClose}>
+                  Прикрепить документ
+                </Button>
+                <h2>Ссылка для подтверждения внешней компанией</h2>
+                <Snippet symbol="" variant="bordered">
+                  npm install @nextui-org/react
+                </Snippet>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={onClose}>
+                  Close
+                </Button>
+                <Button color="primary" onPress={onClose}>
+                  Action
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </Container>
   );
 }
