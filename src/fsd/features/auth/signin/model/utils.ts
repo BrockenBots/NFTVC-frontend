@@ -2,13 +2,6 @@
 
 import { cookies } from "next/headers";
 
-export const setTokens = ({
-  access_token,
-  refresh_token,
-}: {
-  access_token: string;
-  refresh_token: string;
-}) => {
-  localStorage.setItem("access_token", access_token);
+export const setTokens = (refresh_token: string) => {
   cookies().set("refresh_token", refresh_token, { secure: true });
 };
