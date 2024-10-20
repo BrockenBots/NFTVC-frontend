@@ -85,5 +85,9 @@ sample({
 
 sample({
   clock: signInFx.doneData,
-  fn: setTokens,
+  fn: ({ access_token, refresh_token }) => {
+    alert("Вы подключили кошелек");
+    localStorage.setItem("access_token", access_token);
+    setTokens(refresh_token);
+  },
 });
