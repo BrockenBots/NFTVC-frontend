@@ -9,6 +9,10 @@
  * ---------------------------------------------------------------
  */
 
+export interface RequestsRefreshTokensRequest {
+  refresh_token: string;
+}
+
 export interface RequestsSignInWithWalletRequest {
   wallet_pub: string;
 }
@@ -20,6 +24,11 @@ export interface RequestsVerifySignatureRequest {
 
 export interface ResponseErrorResponse {
   error: string;
+}
+
+export interface ResponseRefreshTokensResponse {
+  access_token: string;
+  refresh_token: string;
 }
 
 export interface ResponseSignInWithWalletResponse {
@@ -247,6 +256,24 @@ export class HttpClient<SecurityDataType = unknown> {
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
   api = {
+    /**
+     * @description Обновление access и refresh токенов с использованием валидного refresh токена
+     *
+     * @tags auth
+     * @name AuthRefreshTokensCreate
+     * @summary Обновление Access и Refresh токенов
+     * @request POST:/api/auth/refresh-tokens
+     */
+    authRefreshTokensCreate: (refreshTokens: RequestsRefreshTokensRequest, params: RequestParams = {}) =>
+      this.request<ResponseRefreshTokensResponse, ResponseErrorResponse>({
+        path: `/api/auth/refresh-tokens`,
+        method: "POST",
+        body: refreshTokens,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
     /**
      * @description Авторизация пользователя с использованием его Ethereum кошелька
      *

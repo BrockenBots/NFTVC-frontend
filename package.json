@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "api": "bun swagger-typescript-api -p src/fsd/shared/api/openapi/swagger.json -o src/fsd/shared/api/typed-api"
+    "auth-api": "bun swagger-typescript-api -p src/fsd/shared/api/openapi/swagger-auth.json -o src/fsd/shared/api/typed-api -n AuthApi.ts",
+    "profiles-api": "bun swagger-typescript-api -p src/fsd/shared/api/openapi/swagger-profiles.json -o src/fsd/shared/api/typed-api -n ProfilesApi.ts"
   },
   "dependencies": {
     "@nextui-org/react": "^2.4.8",
