@@ -4,7 +4,7 @@
 import { createEffect, createEvent, sample } from "effector";
 import { pending } from "patronum/pending";
 import { BrowserProvider } from "ethers";
-import { nftApi } from "shared/api";
+import { authApi } from "shared/api";
 import {
   ConnectFxType,
   GetCryptoAccountFxType,
@@ -12,6 +12,7 @@ import {
   SignInFxType,
 } from "./types";
 import { setTokens } from "./utils";
+import { redirect } from "next/navigation";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, no-var
 declare var window: any;
@@ -29,7 +30,7 @@ const getCryptoAccountFx = createEffect<GetCryptoAccountFxType>(
 const connectWalletFx = createEffect<ConnectFxType>(async (account) => {
   const {
     data: { nonce },
-  } = await nftApi.api.authSignInCreate({
+  } = await authApi.api.authSignInCreate({
     wallet_pub: account,
   });
   return { account, nonce };
@@ -48,7 +49,7 @@ const getSignatureFx = createEffect<GetSignatureFxType>(
 const signInFx = createEffect<SignInFxType>(async ({ account, signature }) => {
   const {
     data: { access_token, refresh_token },
-  } = await nftApi.api.authVerifySignatureCreate({
+  } = await authApi.api.authVerifySignatureCreate({
     signature,
     wallet_pub: account,
   });
@@ -86,8 +87,8 @@ sample({
 sample({
   clock: signInFx.doneData,
   fn: ({ access_token, refresh_token }) => {
-    alert("Вы подключили кошелек");
     localStorage.setItem("access_token", access_token);
     setTokens(refresh_token);
+    redirect("/profile/create");
   },
 });

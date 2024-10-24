@@ -23,7 +23,7 @@ export interface RequestsSaveProfileRequest {
   description?: string;
   email?: string;
   login: string;
-  name?: string;
+  name: string;
   photo?: string;
   photo_filename?: string;
   role: string;
@@ -42,9 +42,29 @@ export interface ResponseErrorResponse {
   error: string;
 }
 
+export interface ResponseGetMeResponse {
+  account_id?: string;
+  description?: string;
+  email?: string;
+  login?: string;
+  name?: string;
+  photo?: string;
+  profile_id?: string;
+}
+
 export interface ResponseSaveProfileResponse {
   access_token?: string;
   refresh_token?: string;
+}
+
+export interface ResponseUpdateProfileResponse {
+  account_id?: string;
+  description?: string;
+  email?: string;
+  login?: string;
+  name?: string;
+  photo?: string;
+  profile_id?: string;
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -272,7 +292,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/profiles/
      */
     profilesUpdate: (profile: RequestsUpdateProfileRequest, params: RequestParams = {}) =>
-      this.request<ModelProfile, ResponseErrorResponse>({
+      this.request<ResponseUpdateProfileResponse, ResponseErrorResponse>({
         path: `/api/profiles/`,
         method: "PUT",
         body: profile,
@@ -308,7 +328,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/api/profiles/me
      */
     profilesMeList: (params: RequestParams = {}) =>
-      this.request<ModelProfile, ResponseErrorResponse>({
+      this.request<ResponseGetMeResponse, ResponseErrorResponse>({
         path: `/api/profiles/me`,
         method: "GET",
         ...params,
