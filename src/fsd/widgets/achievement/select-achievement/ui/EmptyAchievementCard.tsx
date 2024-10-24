@@ -1,8 +1,4 @@
-import {
-  deployNFT,
-  getNfts,
-  mintNFT,
-} from "@/fsd/entities/achievements/model/deployContract";
+import { deployNFT } from "@/fsd/entities/achievements/model/deployContract";
 import { Button, Card } from "@nextui-org/react";
 import React from "react";
 
@@ -13,9 +9,12 @@ export function EmptyAchievementCard() {
         Выберите достижения для получения полной информации
       </p>
       <Button onPress={deployNFT}>Выпустить нфт</Button>
-      <Button onPress={mintNFT}>Выпустить нфт еще</Button>
+      <h1>
+        Остальное можно протестировать на crypto репозитории или в Remix ide
+      </h1>
+      {/* <Button onPress={mintNFT}>Выпустить нфт еще</Button> */}
 
-      <Button onPress={getNfts}>Получить сертификаты</Button>
+      {/* <Button onPress={getNfts}>Получить сертификаты</Button> */}
     </Card>
   );
 }
