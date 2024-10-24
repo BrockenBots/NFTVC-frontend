@@ -2,9 +2,9 @@ import { Api as AuthApi } from "./typed-api/AuthApi";
 import { Api as ProfilesApi } from "./typed-api/ProfilesApi";
 
 export const nftApi = new AuthApi({
-  baseUrl: "http://82.97.253.57:81",
+  baseUrl: "http://82.97.253.57",
 });
 
 export const profilesApi = new ProfilesApi({
-  baseUrl: "http://82.97.253.57:81",
+  baseUrl: "http://82.97.253.57",
 });
