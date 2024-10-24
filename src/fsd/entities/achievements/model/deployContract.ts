@@ -73,9 +73,9 @@ export async function getNfts() {
 export async function mintNFT() {
   const provider = new ethers.JsonRpcProvider("HTTP://127.0.0.1:7545");
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const address = new ethers.Wallet(
-    "0x019e3edeb8b1a22c75eb15b2e422f62b2cee407d98d8264547c92fd1970323e4"
-  );
+  // const address = new ethers.Wallet(
+  //   "0x019e3edeb8b1a22c75eb15b2e422f62b2cee407d98d8264547c92fd1970323e4"
+  // );
   const signer = await provider.getSigner();
 
   const { abi, bytecode } = getVeriryContract();
